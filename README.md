@@ -3,6 +3,9 @@
 ## 🚀 Description
 A brief description of your project, its purpose, and key features.
 
+### Week 1 - Block Explorer
+Create a Stellar Block Explorer.
+
 ## 📂 Folder Structure
 ```
 ├── src/             # Source code files

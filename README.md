@@ -52,7 +52,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 ## HashWarriors Team
-Front: @Luciano Zanin 
-Back: @Conrado Niemeyer 
-Back: @jean-felipe 
-Doc: @mscheide 
+- Front: @Luciano Zanin 
+- Back: @Conrado Niemeyer 
+- Back: @jean-felipe 
+- Doc: @mscheide 

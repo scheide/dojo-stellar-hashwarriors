@@ -34,10 +34,10 @@ npm start  # Starts the application
 ```
 
 ## 🤝 Contributing
-This project was created just for learning proposal. Feel free to copy or share it.
+This project was created for learning purposes. Feel free to copy or share it.
 
 ## 📜 License
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License.
 
 ---
 ## HashWarriors Team

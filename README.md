@@ -4,11 +4,11 @@
 This repository contains all projects developed by HashWarriors team to accomplish "NearX DOJO Stellar" challenges.
 
 ### Week 1 - Block Explorer
-Back-end: run a Stellar node on a cloud service.Run a Stellar node and build a block explorer (web page).
-Front-end: build a block explorer.
+- Back-end: run a Stellar node on a cloud service.
+- Front-end: build a block explorer.
 
 ## 📂 Folder Structure
-- `week1_block-explorer`: Contains block explorer project source code
+- `week1_block-explorer/`: Contains block explorer project source code
    - `public/`: Static files that are publicly available.
    - `src/`: Contains all the source code for the project.
 
@@ -42,7 +42,7 @@ This project is licensed under the MIT License.
 ---
 ## HashWarriors Team
 Discord usernames:
-- Front: @Luciano Zanin 
-- Back: @Conrado Niemeyer 
-- Back: @jean-felipe 
-- Doc: @mscheide 
+- @Luciano Zanin 
+- @Conrado Niemeyer 
+- @jean-felipe 
+- @mscheide 

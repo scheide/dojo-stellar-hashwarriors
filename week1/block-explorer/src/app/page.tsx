@@ -2,15 +2,31 @@
 
 import { useState } from "react";
 import axios from "axios";
-import { Search } from "lucide-react";
+import { Search, Eraser } from "lucide-react";
 
 const HORIZON_API_URL = "http://172.233.19.77:8000";
 
 export default function SearchPage() {
-  const [inputs, setInputs] = useState({ ledgerNumber: "", transactionHash: "", accountAddress: "" });
-  const [results, setResults] = useState({ ledger: null, transaction: null, balance: null });
-  const [loading, setLoading] = useState({ ledger: false, transaction: false, balance: false });
-  const [error, setError] = useState({ ledger: null, transaction: null, balance: null });
+  const [inputs, setInputs] = useState({
+    ledgerNumber: "",
+    transactionHash: "",
+    accountAddress: "",
+  });
+  const [results, setResults] = useState({
+    ledger: null,
+    transaction: null,
+    balance: null,
+  });
+  const [loading, setLoading] = useState({
+    ledger: false,
+    transaction: false,
+    balance: false,
+  });
+  const [error, setError] = useState({
+    ledger: null,
+    transaction: null,
+    balance: null,
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,27 +60,51 @@ export default function SearchPage() {
       });
       setResults((prev) => ({ ...prev, [field]: response.data }));
     } catch (err) {
-      setError((prev) => ({ ...prev, [field]: "Error fetching data. Please check if the information is correct." }));
+      setError((prev) => ({
+        ...prev,
+        [field]:
+          "Error fetching data. Please check if the information is correct.",
+      }));
     } finally {
       setLoading((prev) => ({ ...prev, [field]: false }));
     }
   };
 
+  const handleClear = (field: string) => {
+    setInputs((prev) => ({ ...prev, [field]: "" }));
+    setResults((prev) => ({ ...prev, [field]: null }));
+    setError((prev) => ({ ...prev, [field]: null }));
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-6">
       <h1 className="text-2xl font-bold mb-8">Stellar Ledger Explorer</h1>
-      
-      <div className="relative w-full max-w-md">
+
+      <div className="relative w-full max-w-4xl">
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-purple-500 to-yellow-500 rounded-2xl animate-pulse" />
         <div className="absolute inset-[2px] bg-gray-800 rounded-2xl" />
         <div className="relative p-6 space-y-4">
           {[
-            { name: "ledgerNumber", label: "Search Ledger by Number", placeholder: "Ledger Number" },
-            { name: "transactionHash", label: "Search Transaction by Hash", placeholder: "Transaction Hash" },
-            { name: "accountAddress", label: "Search Balance by Address", placeholder: "Wallet Address" }
+            {
+              name: "ledgerNumber",
+              label: "Search Ledger by Number",
+              placeholder: "Ledger Number",
+            },
+            {
+              name: "transactionHash",
+              label: "Search Transaction by Hash",
+              placeholder: "Transaction Hash",
+            },
+            {
+              name: "accountAddress",
+              label: "Search Balance by Address",
+              placeholder: "Wallet Address",
+            },
           ].map((field, index) => (
             <div key={index} className="flex flex-col space-y-2">
-              <label htmlFor={field.name} className="font-medium text-gray-300">{field.label}</label>
+              <label htmlFor={field.name} className="font-medium text-gray-300">
+                {field.label}
+              </label>
               <div className="flex items-center space-x-2">
                 <input
                   id={field.name}
@@ -82,9 +122,17 @@ export default function SearchPage() {
                 >
                   {loading[field.name] ? "..." : <Search size={20} />}
                 </button>
+                <button
+                  className="p-2 bg-red-500 text-white rounded-lg  hover:bg-red-900 transition-all duration-200 disabled:opacity-50 hover:shadow-lg hover:shadow-red-800/25"
+                  onClick={() => handleClear(field.name)}
+                >
+                  <Eraser size={20} />
+                </button>
               </div>
               {error[field.name] && (
-                <p className="text-sm text-red-400 mt-2 animate-pulse">{error[field.name]}</p>
+                <p className="text-sm text-red-400 mt-2 animate-pulse">
+                  {error[field.name]}
+                </p>
               )}
               {results[field.name] && (
                 <div className="text-sm text-gray-300 mt-2 bg-gray-700 p-3 rounded-lg border border-gray-600">

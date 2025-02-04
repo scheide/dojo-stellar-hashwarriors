@@ -3,12 +3,20 @@
 ## 🚀 Description
 This repository contains all projects developed by HashWarriors team to accomplish "NearX DOJO Stellar" challenges.
 
-### Week 1 - Block Explorer
-- Back-end: run a Stellar node on a cloud service.
-- Front-end: build a block explorer.
+### 📅 Week 1 - Block Explorer
+- Run a Stellar node on a cloud service and build a block/ledger explorer.
+
+### 📅 Week 2 
+- Loading...
+
+### 📅 Week 3 
+- Loading...
+
+### 📅 Week 4 
+- Loading...
 
 ## 📂 Folder Structure
-- `week1_block-explorer/`: Contains block explorer project source code
+- `week1/block-explorer/`: Contains block explorer project source code
    - `public/`: Static files that are publicly available.
    - `src/`: Contains all the source code for the project.
 
@@ -21,17 +29,9 @@ This repository contains all projects developed by HashWarriors team to accompli
    ```bash
    cd <project>
    ```
-   - `<project>`: project folder name (eg: week1_block-explorer)
-3. Install dependencies:
-   ```bash
-   npm install  # or yarn install
-   ```
-
-## 💡 Usage
-Provide examples of how to use your project:
-```bash
-npm start  # Starts the application
-```
+   - `<project>`: project folder name (eg: week1/block-explorer)
+3. Install project:
+   Follow README instructions from project folder.
 
 ## 🤝 Contributing
 This project was created for learning purposes. Feel free to copy or share it.
@@ -41,8 +41,7 @@ This project is licensed under the MIT License.
 
 ---
 ## HashWarriors Team
-Discord usernames:
-- @Luciano Zanin 
-- @Conrado Niemeyer 
-- @jean-felipe 
-- @mscheide 
+<div style="display: flex; align-items: center;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png" alt="Discord" style="margin-right: 8px;"/>Luciano Zanin </div> 
+<div style="display: flex; align-items: center;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png" alt="Discord" style="margin-right: 8px;"/>Conrado Niemeyer </div> 
+<div style="display: flex; align-items: center;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png" alt="Discord" style="margin-right: 8px;"/>jean-felipe </div> 
+<div style="display: flex; align-items: center;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png" alt="Discord" style="margin-right: 8px;"/>mscheide </div> 

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Stellar Block Explorer",
+  title: "Stellar Ledger Explorer",
   description: "Nearx DOJO project developed by HashWarriors team",
 };
 

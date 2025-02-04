@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import axios from "axios";
 import { Search } from "lucide-react";
 
-const STELLAR_RPC_URL = "https://soroban-testnet.stellar.org";
+const HORIZON_API_URL = "http://172.233.19.77:8000"; 
 
 export default function SearchPage() {
   const [inputs, setInputs] = useState({ ledgerNumber: "", transactionHash: "", accountAddress: "" });
@@ -22,49 +23,30 @@ export default function SearchPage() {
     setLoading((prev) => ({ ...prev, [field]: true }));
     setError((prev) => ({ ...prev, [field]: null }));
 
+    let url;
+    switch (field) {
+      case "ledgerNumber":
+        url = `${HORIZON_API_URL}/ledgers/${inputs[field]}`;
+        break;
+      case "transactionHash":
+        url = `${HORIZON_API_URL}/transactions/${inputs[field]}`;
+        break;
+      case "accountAddress":
+        url = `${HORIZON_API_URL}/claimable_balances/${inputs[field]}`;
+        break;
+      default:
+        return;
+    }
+
     try {
-      let requestBody;
-      switch (field) {
-        case "ledgerNumber":
-          requestBody = {
-            jsonrpc: "2.0",
-            id: 1,
-            method: "getLedger",
-            params: { sequence: parseInt(inputs[field], 10) }
-          };
-          break;
-
-        case "transactionHash":
-          requestBody = {
-            jsonrpc: "2.0",
-            id: 2,
-            method: "getTransaction",
-            params: { hash: inputs[field] }
-          };
-          break;
-
-        case "accountAddress":
-          requestBody = {
-            jsonrpc: "2.0",
-            id: 3,
-            method: "getAccount",
-            params: { address: inputs[field] }
-          };
-          break;
-
-        default:
-          return;
-      }
-
-      const response = await fetch(STELLAR_RPC_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody),
+      const response = await axios.get(url, {
+        headers: { Accept: "application/json" },
       });
 
-      const json = await response.json();
-      setResults((prev) => ({ ...prev, [field]: json.result }));
+      console.log(`Response for ${field}:`, response.data);
+      setResults((prev) => ({ ...prev, [field]: response.data }));
     } catch (err) {
+      console.error(`Error fetching ${field}:`, err);
       setError((prev) => ({ ...prev, [field]: "Error fetching data. Please check if the information is correct." }));
     } finally {
       setLoading((prev) => ({ ...prev, [field]: false }));
@@ -78,7 +60,7 @@ export default function SearchPage() {
         {[
           { name: "ledgerNumber", label: "Search Ledger by Number", placeholder: "Ledger Number" },
           { name: "transactionHash", label: "Search Transaction by Hash", placeholder: "Transaction Hash" },
-          { name: "accountAddress", label: "Search Address", placeholder: "Wallet Address" }
+          { name: "accountAddress", label: "Search Balance by Address", placeholder: "Wallet Address" }
         ].map((field, index) => (
           <div key={index} className="flex flex-col space-y-2">
             <label htmlFor={field.name} className="font-medium">{field.label}</label>
@@ -102,9 +84,12 @@ export default function SearchPage() {
             </div>
             {error[field.name] && <p className="text-sm text-red-500 mt-2">{error[field.name]}</p>}
             {results[field.name] && (
-              <pre className="text-sm text-gray-300 mt-2 whitespace-pre-wrap">
-                {JSON.stringify(results[field.name], null, 2)}
-              </pre>
+              <div className="text-sm text-gray-300 mt-2 bg-gray-700 p-3 rounded-lg">
+                <strong>Resultado:</strong>
+                <pre className="whitespace-pre-wrap break-words">
+                  {JSON.stringify(results[field.name], null, 2)}
+                </pre>
+              </div>
             )}
           </div>
         ))}

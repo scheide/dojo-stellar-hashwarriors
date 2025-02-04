@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -13,29 +14,27 @@ export default function SearchPage() {
     accountAddress: "",
   });
   const [results, setResults] = useState({
-    ledger: null,
-    transaction: null,
-    balance: null,
+    ledgerNumber: null,
+    transactionHash: null,
+    accountAddress: null,
   });
   const [loading, setLoading] = useState({
-    ledger: false,
-    transaction: false,
-    balance: false,
+    ledgerNumber: false,
+    transactionHash: false,
+    accountAddress: false,
   });
   const [error, setError] = useState({
-    ledger: null,
-    transaction: null,
-    balance: null,
+    ledgerNumber: null,
+    transactionHash: null,
+    accountAddress: null,
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSearch = async (field) => {
-    if (!inputs[field]) return;
-
+  const handleSearch = async (field: string) => {
     setLoading((prev) => ({ ...prev, [field]: true }));
     setError((prev) => ({ ...prev, [field]: null }));
 
@@ -60,6 +59,7 @@ export default function SearchPage() {
       });
       setResults((prev) => ({ ...prev, [field]: response.data }));
     } catch (err) {
+      console.error(err);
       setError((prev) => ({
         ...prev,
         [field]:
@@ -78,7 +78,7 @@ export default function SearchPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-6">
-      <h1 className="text-2xl font-bold mb-8">Stellar Ledger Explorer</h1>
+      <h1 className="text-4xl font-bold mb-8">Stellar Ledger Explorer</h1>
 
       <div className="relative w-full max-w-4xl">
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-purple-500 to-yellow-500 rounded-2xl animate-pulse" />
@@ -86,17 +86,17 @@ export default function SearchPage() {
         <div className="relative p-6 space-y-4">
           {[
             {
-              name: "ledgerNumber",
+              name: "ledgerNumber" as keyof typeof inputs,
               label: "Search Ledger by Number",
               placeholder: "Ledger Number",
             },
             {
-              name: "transactionHash",
+              name: "transactionHash" as keyof typeof inputs,
               label: "Search Transaction by Hash",
               placeholder: "Transaction Hash",
             },
             {
-              name: "accountAddress",
+              name: "accountAddress" as keyof typeof inputs,
               label: "Search Balance by Address",
               placeholder: "Wallet Address",
             },

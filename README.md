@@ -41,7 +41,7 @@ This project is licensed under the MIT License.
 
 ---
 ## HashWarriors Team
-<div style="display: flex; align-items: center;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png" alt="Discord" style="margin-right: 8px;"/>Luciano Zanin </div> 
-<div style="display: flex; align-items: center;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png" alt="Discord" style="margin-right: 8px;"/>Conrado Niemeyer </div> 
-<div style="display: flex; align-items: center;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png" alt="Discord" style="margin-right: 8px;"/>jean-felipe </div> 
-<div style="display: flex; align-items: center;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png" alt="Discord" style="margin-right: 8px;"/>mscheide </div> 
+<div style="display: flex;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;Luciano Zanin</div> 
+<div style="display: flex;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;Conrado Niemeyer </div> 
+<div style="display: flex;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;jean-felipe </div> 
+<div style="display: flex;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;mscheide</div> 

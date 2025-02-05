@@ -17,5 +17,10 @@ This app provides 3 types of searching on Stellar Blockchain:
     npm run dev
     ```
 
+2. Create a `.env.local` file in the project root:
+    ```env
+    HORIZON_API_URL=http://172.233.19.77:8000
+    ```
+
 2. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result:
     ![Ledger Explorer screenshot](public/ledger-explorer.png)

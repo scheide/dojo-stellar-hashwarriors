@@ -5,8 +5,6 @@ import { useState } from "react";
 import axios from "axios";
 import { Search, Eraser } from "lucide-react";
 
-const HORIZON_API_URL = "http://172.233.19.77:8000";
-
 export default function SearchPage() {
   const [inputs, setInputs] = useState({
     ledgerNumber: "",
@@ -41,13 +39,16 @@ export default function SearchPage() {
     let url;
     switch (field) {
       case "ledgerNumber":
-        url = `${HORIZON_API_URL}/ledgers/${inputs[field]}`;
+        // Proxy through the API (no need to directly call the Horizon API)
+        url = `/api/proxy?type=ledgers&id=${inputs[field]}`;
         break;
       case "transactionHash":
-        url = `${HORIZON_API_URL}/transactions/${inputs[field]}`;
+        // Proxy through the API
+        url = `/api/proxy?type=transactions&id=${inputs[field]}`;
         break;
       case "accountAddress":
-        url = `${HORIZON_API_URL}/claimable_balances/${inputs[field]}`;
+        // Proxy through the API
+        url = `/api/proxy?type=claimable_balances&id=${inputs[field]}`;
         break;
       default:
         return;
@@ -150,6 +151,9 @@ export default function SearchPage() {
           ))}
         </div>
       </div>
+      <footer className="mt-8 text-center text-gray-500">
+        by HashWarriors
+      </footer>
     </div>
   );
 }

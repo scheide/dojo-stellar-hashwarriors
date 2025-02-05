@@ -41,7 +41,7 @@ This project is licensed under the MIT License.
 
 ---
 ## HashWarriors Team
-<div style="display: flex;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;Luciano Zanin</div> 
-<div style="display: flex;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;Conrado Niemeyer </div> 
-<div style="display: flex;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;jean-felipe </div> 
-<div style="display: flex;"> <img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;mscheide</div> 
+<img src="https://img.icons8.com/color/24/000000/discord-logo.png"/> Luciano Zanin
+<img src="https://img.icons8.com/color/24/000000/discord-logo.png"/> Conrado Niemeyer
+<img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;jean-felipe
+<img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;mscheide

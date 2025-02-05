@@ -40,8 +40,8 @@ This project was created for learning purposes. Feel free to copy or share it.
 This project is licensed under the MIT License.
 
 ---
-## HashWarriors Team
-<img src="https://img.icons8.com/color/24/000000/discord-logo.png"/> Luciano Zanin
-<img src="https://img.icons8.com/color/24/000000/discord-logo.png"/> Conrado Niemeyer
-<img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;jean-felipe
-<img src="https://img.icons8.com/color/24/000000/discord-logo.png"/>&nbsp;mscheide
+## 👤 HashWarriors Team
+   - Conrado Niemeyer
+   - jean-felipe
+   - Luciano Zanin
+   - mscheide

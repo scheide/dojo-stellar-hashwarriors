@@ -47,7 +47,7 @@ export default function SearchPage() {
         url = `${HORIZON_API_URL}/transactions/${inputs[field]}`;
         break;
       case "accountAddress":
-        url = `${HORIZON_API_URL}/claimable_balances/${inputs[field]}`;
+        url = `${HORIZON_API_URL}/accounts/${inputs[field]}`;
         break;
       default:
         return;

@@ -6,13 +6,13 @@ This repository contains all projects developed by HashWarriors team to accompli
 ### 📅 Week 1 - Block Explorer
 - Run a Stellar node on a cloud service and build a block/ledger explorer.
 
-### 📅 Week 2 
+### 📅 Week 2 - Create a CLI Wallet
+- Create a CLI wallet and deploy it on a package provider (PyPI, NPM, or Crate).
+
+### 📅 Week 3 - Blockchain Oracle
 - Loading...
 
-### 📅 Week 3 
-- Loading...
-
-### 📅 Week 4 
+### 📅 Week 4 - Decentralized Exchange
 - Loading...
 
 ## 📂 Folder Structure

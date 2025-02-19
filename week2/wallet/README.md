@@ -30,15 +30,19 @@ Project created to accomplish Nearx DOJO Stellar Week 2 challenge. This app impl
 
 ## Preview
 Creating an account:
+
 ![Create account](public/01-create-account.png)
 ![Account created](public/02-account-created.png)
 
 Listing accounts:
+
 ![List accounts](public/03-list-accounts.png)
 
 Sending XML:
+
 ![Transaction](public/04-transaction.png)
 ![Transaction success](public/05-transaction-success.png)
 
 Check balances after transaction:
+
 ![Check balances](public/06-check-balances.png)

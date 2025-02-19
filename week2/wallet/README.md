@@ -2,14 +2,14 @@
 
 Project created to accomplish Nearx DOJO Stellar Week 2 challenge. This app implements features to create accounts, send XLM tokens between two accounts, and show account balances.
 
-## 🛠️ Installation
+## :hammer_and_wrench: Installation
 
 1. Install dependencies:
    ```bash
    npm install
    ```
 
-## 🚀 Usage
+## :rocket: Usage
 1. Configure `.env` file with PostgreSQL credentials:
     ```env
     DATABASE_URL="postgresql://username:password@localhost:5432/mydatabase"
@@ -28,7 +28,7 @@ Project created to accomplish Nearx DOJO Stellar Week 2 challenge. This app impl
 4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
-## Preview
+## :movie_camera: Preview
 Creating an account:
 
 ![Create account](public/01-create-account.png)

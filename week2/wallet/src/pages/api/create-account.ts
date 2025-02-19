@@ -1,10 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === "POST") {
     const { alias } = req.body;
 
@@ -20,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           secret: newKeypair.secret(),
         },
       });
-      
+
       // Fund the new Stellar account
       const fundAccount = async (publicKey: string) => {
         const friendbotUrl = `https://friendbot.stellar.org?addr=${publicKey}`;
@@ -31,18 +34,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           } else {
             console.error(`Failed to fund account: ${publicKey}`);
           }
-        } catch (error: any) {
-          if (error.code === 'P2002' && error.meta?.target?.includes('alias')) {
-            return res.status(400).json({ error: 'Alias already exists. Please choose a different alias.' });
+        } catch (error: unknown) {
+          if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            if (
+              error.code === "P2002" &&
+              (error.meta?.target as string[])?.includes("alias")
+            ) {
+              return res.status(400).json({
+                error: "Alias already exists. Please choose a different alias.",
+              });
+            } else {
+              return res.status(500).json({ error: error.message });
+            }
           }
-          return res.status(500).json({ error: error.message });
         }
       };
-      await fundAccount(newKeypair.publicKey());          
+      await fundAccount(newKeypair.publicKey());
 
       return res.status(200).json({ savedKeypair });
-    } catch (error: any) {
-      return res.status(500).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ error: error.message });
+      }
     }
   } else {
     res.setHeader("Allow", ["POST"]);

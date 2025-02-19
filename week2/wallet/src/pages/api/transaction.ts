@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PrismaClient } from "@prisma/client";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -58,8 +57,12 @@ export default async function handler(
       // Submit transaction
       const transactionResult = await server.submitTransaction(transaction);
       return res.status(200).json({ transactionResult });
-    } catch (error: any) {
-      return res.status(500).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ error: error.message });
+      } else {
+        return res.status(500).json({ error: "An unknown error occurred" });
+      }
     }
   } else {
     res.setHeader("Allow", ["POST"]);

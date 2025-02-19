@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -61,7 +60,12 @@ export default function Home() {
       const response = await fetch("/api/keypairs");
       const allKeypairs = await response.json();
       setKeypairs(
-        allKeypairs.map((kp: any) => ({ ...kp, showBalance: false }))
+        allKeypairs.map(
+          (kp: { alias: string; publicKey: string; secret: string }) => ({
+            ...kp,
+            showBalance: false,
+          })
+        )
       );
     };
     fetchKeypairs();
@@ -74,7 +78,7 @@ export default function Home() {
       );
       const account = await response.json();
       const balance = account.balances.find(
-        (b: any) => b.asset_type === "native"
+        (b: { asset_type: string }) => b.asset_type === "native"
       ).balance;
       return balance;
     } catch (error) {
@@ -176,7 +180,12 @@ export default function Home() {
         res.json()
       );
       setKeypairs(
-        allKeypairs.map((kp: any) => ({ ...kp, showBalance: false }))
+        allKeypairs.map(
+          (kp: { alias: string; publicKey: string; secret: string }) => ({
+            ...kp,
+            showBalance: false,
+          })
+        )
       );
     } else {
       setResultMessage(`Account creation failed: ${result.error}`);

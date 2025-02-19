@@ -38,7 +38,7 @@ Listing accounts:
 
 ![List accounts](public/03-list-accounts.png)
 
-Sending XML:
+Sending XLM:
 
 ![Transaction](public/04-transaction.png)
 ![Transaction success](public/05-transaction-success.png)

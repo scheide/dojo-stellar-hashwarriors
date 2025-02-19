@@ -10,7 +10,7 @@ Project created to accomplish Nearx DOJO Stellar Week 2 challenge. This app impl
    ```
 
 ## 🚀 Usage
-1. Configure .env file with PostgreSQL credentials:
+1. Configure `.env` file with PostgreSQL credentials:
     ```env
     DATABASE_URL="postgresql://username:password@localhost:5432/mydatabase"
     ```
@@ -43,6 +43,6 @@ Sending XLM:
 ![Transaction](public/04-transaction.png)
 ![Transaction success](public/05-transaction-success.png)
 
-Check balances after transaction:
+Checking balances after transaction:
 
-![Check balances](public/06-check-balances.png)
+![Checking balances](public/06-check-balances.png)

@@ -11,7 +11,6 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { sender, receiver, amount } = req.body;
-    console.log(sender, receiver, amount);
 
     try {
       // Fetch sender and receiver keypairs

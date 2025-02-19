@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stellar Wallet
 
-## Getting Started
+Project created to accomplish Nearx DOJO Stellar Week 2 challenge. This app implements features to create accounts, send XLM tokens between two accounts, and show account balances.
 
-First, run the development server:
+## 🛠️ Installation
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Usage
+1. Configure .env file with PostgreSQL credentials:
+    ```env
+    DATABASE_URL="postgresql://username:password@localhost:5432/mydatabase"
+    ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Run Prisma migration:
+    ```bash
+    npx prisma migrate dev --name init
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-## Learn More
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Preview
+Creating an account:
+![Create account](public/01-create-account.png)
+![Account created](public/02-account-created.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Listing accounts:
+![List accounts](public/03-list-accounts.png)
 
-## Deploy on Vercel
+Sending XML:
+![Transaction](public/04-transaction.png)
+![Transaction success](public/05-transaction-success.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check balances after transaction:
+![Check balances](public/06-check-balances.png)

@@ -1,16 +1,27 @@
-"use client"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as StellarSdk from "@stellar/stellar-sdk";
 
-const Modal = ({ message, onClose }: { message: string; onClose: () => void }) => {
+const Modal = ({
+  message,
+  onClose,
+}: {
+  message: string;
+  onClose: () => void;
+}) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-xl">
-        <h2 className="text-3xl font-bold mb-6 text-center text-orange-500">Message</h2>
-        <p className="text-gray-300 text-center mb-6 whitespace-pre-wrap break-words">{message}</p>
+        <h2 className="text-3xl font-bold mb-6 text-center text-orange-500">
+          Message
+        </h2>
+        <p className="text-gray-300 text-center mb-6 whitespace-pre-wrap break-words">
+          {message}
+        </p>
         <button
           className="w-full bg-orange-500 text-white p-2 rounded mt-4 hover:bg-orange-600"
           onClick={onClose}
@@ -23,7 +34,16 @@ const Modal = ({ message, onClose }: { message: string; onClose: () => void }) =
 };
 
 export default function Home() {
-  const [keypairs, setKeypairs] = useState<{ id: number; alias: string; publicKey: string; secret: string; balance?: string; showBalance?: boolean }[]>([]);
+  const [keypairs, setKeypairs] = useState<
+    {
+      id: number;
+      alias: string;
+      publicKey: string;
+      secret: string;
+      balance?: string;
+      showBalance?: boolean;
+    }[]
+  >([]);
   const [sender, setSender] = useState("");
   const [receiver, setReceiver] = useState("");
   const [amount, setAmount] = useState("");
@@ -40,16 +60,22 @@ export default function Home() {
     const fetchKeypairs = async () => {
       const response = await fetch("/api/keypairs");
       const allKeypairs = await response.json();
-      setKeypairs(allKeypairs.map((kp: any) => ({ ...kp, showBalance: false })));
+      setKeypairs(
+        allKeypairs.map((kp: any) => ({ ...kp, showBalance: false }))
+      );
     };
     fetchKeypairs();
   }, []);
 
   const fetchBalance = async (publicKey: string) => {
     try {
-      const response = await fetch(`https://horizon-testnet.stellar.org/accounts/${publicKey}`);
+      const response = await fetch(
+        `https://horizon-testnet.stellar.org/accounts/${publicKey}`
+      );
       const account = await response.json();
-      const balance = account.balances.find((b: any) => b.asset_type === "native").balance;
+      const balance = account.balances.find(
+        (b: any) => b.asset_type === "native"
+      ).balance;
       return balance;
     } catch (error) {
       console.error("Error fetching balance:", error);
@@ -57,7 +83,9 @@ export default function Home() {
     }
   };
 
-  const handleSenderChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSenderChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const publicKey = e.target.value;
     setSender(publicKey);
     if (publicKey) {
@@ -68,7 +96,9 @@ export default function Home() {
     }
   };
 
-  const handleReceiverChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleReceiverChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const publicKey = e.target.value;
     setReceiver(publicKey);
     if (publicKey) {
@@ -137,11 +167,17 @@ export default function Home() {
     const result = await response.json();
     setIsProcessing(false);
     if (response.ok) {
-      setResultMessage(`Account created successfully!\nPublic Key: ${result.savedKeypair.publicKey}`);
+      setResultMessage(
+        `Account created successfully!\nPublic Key: ${result.savedKeypair.publicKey}`
+      );
       setNewAlias("");
       // Refresh keypairs list
-      const allKeypairs = await fetch("/api/keypairs").then(res => res.json());
-      setKeypairs(allKeypairs.map((kp: any) => ({ ...kp, showBalance: false })));
+      const allKeypairs = await fetch("/api/keypairs").then((res) =>
+        res.json()
+      );
+      setKeypairs(
+        allKeypairs.map((kp: any) => ({ ...kp, showBalance: false }))
+      );
     } else {
       setResultMessage(`Account creation failed: ${result.error}`);
     }
@@ -167,25 +203,39 @@ export default function Home() {
   const toggleBalanceVisibility = (publicKey: string) => {
     setKeypairs((prevKeypairs) =>
       prevKeypairs.map((kp) =>
-        kp.publicKey === publicKey ? { ...kp, showBalance: !kp.showBalance } : kp
+        kp.publicKey === publicKey
+          ? { ...kp, showBalance: !kp.showBalance }
+          : kp
       )
     );
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900">
-      <h1 className="text-7xl font-bold mb-1 text-center text-orange-500">SWM</h1>
-      <h1 className="text-sm font-bold mb-4 text-center text-orange-500">Stellar Wallets Manager</h1>
+      <h1 className="text-7xl font-bold mb-1 text-center text-orange-500">
+        SWM
+      </h1>
+      <h1 className="text-sm font-bold mb-4 text-center text-orange-500">
+        Stellar Wallets Manager
+      </h1>
       <div className="bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md mb-8">
         <div className="flex justify-between mb-6 border-b border-gray-600">
           <button
-            className={`text-lg font-bold px-4 py-2 ${currentForm === "create-account" ? "text-orange-500 border-b-2 border-orange-500" : "text-gray-300"}`}
+            className={`text-lg font-bold px-4 py-2 ${
+              currentForm === "create-account"
+                ? "text-orange-500 border-b-2 border-orange-500"
+                : "text-gray-300"
+            }`}
             onClick={() => setCurrentForm("create-account")}
           >
             Create Account
           </button>
           <button
-            className={`text-lg font-bold px-4 py-2 ${currentForm === "transaction" ? "text-orange-500 border-b-2 border-orange-500" : "text-gray-300"}`}
+            className={`text-lg font-bold px-4 py-2 ${
+              currentForm === "transaction"
+                ? "text-orange-500 border-b-2 border-orange-500"
+                : "text-gray-300"
+            }`}
             onClick={() => setCurrentForm("transaction")}
           >
             Transaction
@@ -228,7 +278,9 @@ export default function Home() {
                 ))}
               </select>
               {sender && (
-                <p className="mt-2 text-gray-300">Balance: {senderBalance} XLM</p>
+                <p className="mt-2 text-gray-300">
+                  Balance: {senderBalance} XLM
+                </p>
               )}
             </div>
             <div className="mb-4">
@@ -246,7 +298,9 @@ export default function Home() {
                 ))}
               </select>
               {receiver && (
-                <p className="mt-2 text-gray-300">Balance: {receiverBalance} XLM</p>
+                <p className="mt-2 text-gray-300">
+                  Balance: {receiverBalance} XLM
+                </p>
               )}
             </div>
             <div className="mb-4">
@@ -276,14 +330,21 @@ export default function Home() {
       {showKeypairs && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-2xl">
-            <h2 className="text-3xl font-bold mb-6 text-center text-orange-500">Accounts</h2>
+            <h2 className="text-3xl font-bold mb-6 text-center text-orange-500">
+              Accounts
+            </h2>
             <div className="bg-gray-700 p-4 rounded mt-2 text-gray-300 text-sm whitespace-pre-wrap break-words">
               {keypairs.map((kp) => (
                 <div key={kp.publicKey} className="mb-4">
-                  <p className="text-lg font-bold text-orange-500">{kp.alias}</p>
-                  <p><strong>Public Key:</strong> {kp.publicKey}</p>
+                  <p className="text-lg font-bold text-orange-500">
+                    {kp.alias}
+                  </p>
                   <p>
-                    <strong>Balance:</strong> {kp.showBalance ? kp.balance : "*****"} XLM
+                    <strong>Public Key:</strong> {kp.publicKey}
+                  </p>
+                  <p>
+                    <strong>Balance:</strong>{" "}
+                    {kp.showBalance ? kp.balance : "*****"} XLM
                     <button
                       className="ml-2 text-orange-500"
                       onClick={() => {
@@ -293,7 +354,9 @@ export default function Home() {
                         toggleBalanceVisibility(kp.publicKey);
                       }}
                     >
-                      <FontAwesomeIcon icon={kp.showBalance ? faEyeSlash : faEye} />
+                      <FontAwesomeIcon
+                        icon={kp.showBalance ? faEyeSlash : faEye}
+                      />
                     </button>
                   </p>
                 </div>
@@ -309,10 +372,7 @@ export default function Home() {
         </div>
       )}
       {showModal && (
-        <Modal
-          message={resultMessage}
-          onClose={() => setShowModal(false)}
-        />
+        <Modal message={resultMessage} onClose={() => setShowModal(false)} />
       )}
     </div>
   );

@@ -1,25 +1,43 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PrismaClient } from "@prisma/client";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === "POST") {
     const { sender, receiver, amount } = req.body;
+    console.log(sender, receiver, amount);
 
     try {
-      const senderKeypair = StellarSdk.Keypair.fromSecret(sender);
+      // Fetch sender and receiver keypairs
+      const senderKeypair = await prisma.keypair.findFirst({
+        where: { publicKey: sender },
+      });
+      if (!senderKeypair) {
+        return res.status(404).json({ error: "Sender keypair not found" });
+      }
+
       const receiverKeypair = await prisma.keypair.findFirst({
         where: { publicKey: receiver },
       });
-
       if (!receiverKeypair) {
         return res.status(404).json({ error: "Receiver keypair not found" });
       }
 
-      const server = new StellarSdk.Horizon.Server("https://horizon-testnet.stellar.org");
-      const senderAccount = await server.loadAccount(senderKeypair.publicKey());
+      // Initialize StellarSdk server
+      const server = new StellarSdk.Horizon.Server(
+        "https://horizon-testnet.stellar.org"
+      );
+
+      // Load sender account
+      const senderAccount = await server.loadAccount(senderKeypair.publicKey);
+
+      //
       const transaction = new StellarSdk.TransactionBuilder(senderAccount, {
         fee: StellarSdk.BASE_FEE,
         networkPassphrase: StellarSdk.Networks.TESTNET,
@@ -34,10 +52,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .setTimeout(300)
         .build();
 
-      // Sign the transaction
-      transaction.sign(senderKeypair);
+      // Sign transaction
+      const signKeypair = StellarSdk.Keypair.fromSecret(senderKeypair.secret);
+      transaction.sign(signKeypair);
 
-      // Submit the transaction
+      // Submit transaction
       const transactionResult = await server.submitTransaction(transaction);
       return res.status(200).json({ transactionResult });
     } catch (error: any) {

@@ -3,13 +3,18 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === "GET") {
     try {
-      const keypairs = await prisma.keypair.findMany({orderBy: {alias: "asc"}});
+      const keypairs = await prisma.keypair.findMany({
+        orderBy: { alias: "asc" },
+      });
       res.status(200).json(keypairs);
     } catch (error) {
-      res.status(500).json({ error: "Failed to fetch keypairs" });
+      res.status(500).json({ error: "Failed to fetch keypairs:" + error });
     }
   } else {
     res.setHeader("Allow", ["GET"]);

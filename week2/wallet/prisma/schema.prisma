@@ -8,8 +8,8 @@ datasource db {
 }
 
 model Keypair {
-    id        Int    @id @default(autoincrement())
-    alias     String  @unique
+    id        Int      @id @default(autoincrement())
+    alias     String   @unique
     secret    String
     publicKey String
     createdAt DateTime @default(now())
